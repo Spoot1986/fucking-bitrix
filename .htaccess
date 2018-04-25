@@ -3,12 +3,16 @@
   RewriteEngine On
 
   RewriteBase /
+  #ридерект без слеша -> слеш#
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_URI} !(.*)/$
   RewriteRule ^(.*[^/])$ $1/ [R=301,L]
+  
+  #ридерект слеш -> без слеша#
+  RewriteCond %{REQUEST_FILENAME} !-d 
+  RewriteCond %{REQUEST_URI} ^(.+)/$ 
+  RewriteRule ^(.+)/$ /$1 [R=301,L] 
 
-  RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
-  RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-l
